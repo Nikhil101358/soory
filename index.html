@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Please honey forgive me..I love you so much yaar ❤️❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://tenor.com/en-GB/view/cute-gif-106011066590941818"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Pacifico", cursive;
+        background: #0d0d0d;
+        overflow-x: hidden;
+        color: white;
+      }
+
+      .step {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 60px 20px 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        z-index: 1;
+      }
+
+      .step.active {
+        opacity: 1;
+        z-index: 2;
+      }
+
+      h1 {
+        color: #ff0033;
+        font-size: 2.4em;
+        margin-bottom: 15px;
+      }
+
+      p {
+        color: #e0e0e0;
+        font-size: 1.1em;
+        margin-bottom: 25px;
+        max-width: 90%;
+      }
+
+      .sticker {
+        width: 150px;
+        height: 150px; /* 💡 force square */
+        max-width: 80%;
+        margin-bottom: 20px;
+        animation: bounce 2s infinite;
+        border-radius: 50%;
+        border: 4px solid #ff004f;
+        box-shadow: 0 0 12px #ff004f;
+        object-fit: cover;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .glow-btn {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 30px;
+        background: #ff004f;
+        color: #fff;
+        font-size: 1.1em;
+        font-family: "Pacifico", cursive;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+      }
+
+      .glow-btn::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 0, 76, 0.7) 10%,
+          transparent 70%
+        );
+        animation: pulse 2s infinite;
+        z-index: 0;
+      }
+
+      .glow-btn span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .glow-btn:hover {
+        transform: scale(1.05);
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.4);
+          opacity: 0;
+        }
+      }
+
+      .game-boxes {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .gift {
+        width: 100px;
+        height: 100px;
+        background: url("https://cdn-icons-png.flaticon.com/512/7641/7641727.png")
+          center/cover no-repeat;
+        background-color: #1a1a1a;
+        border: 3px solid #ff0033;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+
+      .gift:hover {
+        transform: scale(1.1);
+      }
+
+      .hearts {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .heart {
+        width: 20px;
+        height: 20px;
+        background: red;
+        position: absolute;
+        transform: rotate(45deg);
+        animation: float 6s linear infinite;
+      }
+
+      .heart::before,
+      .heart::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        background: red;
+        border-radius: 50%;
+        position: absolute;
+      }
+
+      .heart::before {
+        top: -10px;
+        left: 0;
+      }
+      .heart::after {
+        left: -10px;
+        top: 0;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) rotate(45deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-10vh) rotate(45deg);
+          opacity: 0;
+        }
+      }
+
+      #popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(6px);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        animation: scaleUp 0.6s ease forwards;
+      }
+
+      #popup.show {
+        display: flex;
+      }
+
+      #popup h1 {
+        font-size: 2.5em;
+        color: #ff0033;
+        margin-bottom: 10px;
+      }
+
+      @keyframes scaleUp {
+        from {
+          transform: scale(0.6);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        .sticker {
+          width: 120px;
+          height: 120px;
+        }
+        h1 {
+          font-size: 1.8em;
+        }
+        p {
+          font-size: 1em;
+        }
+        .glow-btn {
+          font-size: 1em;
+          padding: 10px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+   <div class="hearts" id="hearts"></div>
+    
+
+    <!-- Step 1 -->
+    <div class="step active" id="step1">
+      <img
+        class="sticker"
+        src="https://media.tenor.com/VkuSAzKnb8UAAAAi/rosas.gif"
+        alt="bear blowing kiss"
+      />
+      <h1>hlew honey!! please listen to me..🙏🙏</h1>
+      <p>I am really sorry please see this whole🙏</p>
+      <button class="glow-btn" onclick="nextStep(2)">
+        <span>Okay!!</span>
+      </button>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step" id="step2">
+      <img
+        class="sticker"
+        src="https://tenor.com/en-GB/view/love-bear-panda-gif-18519830"
+        alt="hearts bear"
+      />
+      <h1>I am soory honey!! you are the best moment of my life how can i stop this huh</h1>
+      <p>Your smile, your soul, the way you laugh — it’s all magic to me.</p>
+      <button class="glow-btn" onclick="nextStep(3)">
+        <span>GET LOST </span>
+      </button>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step" id="step3">
+      <img
+        class="sticker"
+        src="https://www.pinterest.com/pin/sorry-gif-sorry-discover-share-gifs--617696905175544543/
+        alt="gift bear"
+      />
+      <h1>Let’s play a game 🎁</h1>
+      <p>Select one box for me please  😜</p>
+      <div class="game-boxes">
+        <div class="gift" onclick="checkGift(1)"></div>
+        <div class="gift" onclick="checkGift(2)"></div>
+        <div class="gift" onclick="checkGift(3)"></div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step" id="step4">
+      <img
+        class="sticker"
+        src="https://tenor.com/en-GB/view/flowers-rose-roses-%EC%9E%A5%EB%AF%B8-%EA%BD%83-gif-16489806130701079698
+        alt="hugging bears"
+      />
+      <h1>Please forgive me honey!!</h1>
+      <p>
+        I dnt know y haarwakt kthi hojaihai kono na kono prblm aaibey jaihai.but this time hamr kono fault nai hai schii
+        nor i texted her nor his brother..
+      </p>
+      <button class="glow-btn" onclick="nextStep(5)">
+        <span>eyy..</span>
+      </button>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step" id="step5">
+      <img
+        class="sticker"
+        src="https://in.pinterest.com/pin/987484655766721462/"
+        alt="hugging bears"
+      />
+      <h1>Please lets fix everything again We love each other alotttt</h1>h!
+      <p>Say YES, Yaar tere alawa koe axii nhi lagti mujheyy uh r the bestt k </p>
+      <button class="glow-btn" onclick="showLovePopup()">
+        <span>YES 💕</span>
+      </button>
+    </div>
+
+    <!-- Final Popup -->
+    <div id="popup">
+      <img
+        class="sticker"
+        src="https://media.tenor.com/kQjsTRbRQoYAAAAj/quby.gif"
+        alt="hugging bears"
+      />
+      <h1>I Love You! Yaar all i did is i lied at that time because your mood was off since morning and it was better to say at night 
+        after making everything fine..mom swear ham ee wla hide nai kairit yaar bcz in this she was here and later on probrlm hoitai which i dont want k..after being in ktm all i want is a happy life with uh
+        jai mein uh me our works thts it ntggg else k and after being in ktm i dont want any issues between uh and me..jehney uu xaura k msg aalai at first i told skhsm bhaiya if uh dont believe then ask him k i will never hide anything from you..yaar issues hoi xalai woi bich mein wotey ta ham khali normally kahne xli ki ee e bhel hai but aai mein ta ham pura ss send ka ka k kahli cz hamra kono issue nai chahi xalai...
+        I love you alot yaar..lets make this again like US na pleaseeee
+      <p>You made my world complete🌍💘</p>
+    </div>
+
+    <script>
+      function nextStep(n) {
+        document
+          .querySelectorAll(".step")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById("step" + n).classList.add("active");
+      }
+
+      function checkGift(num) {
+        if (num === 2) {
+          nextStep(4);
+        } else {
+          alert("Oops! Try again, love select bich wla  💌");
+        }
+      }
+
+      function showLovePopup() {
+        document.getElementById("popup").classList.add("show");
+      }
+
+      const heartsContainer = document.getElementById("hearts");
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+        heartsContainer.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }, 150);
+    </script>
+    <!-- Confetti Script -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+      function showLovePopup() {
+        document.getElementById("popup").classList.add("show");
+
+        // 🎉 Fire confetti
+        confetti({
+          particleCount: 250,
+          spread: 80,
+          origin: { y: 0.7 },
+        });
+      }
+    </script>
+  </body>
+</html>
